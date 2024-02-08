@@ -1,7 +1,18 @@
 #!/bin/bash
 
+
+# Function to install Docker
 installDocker() {
-    clear
+
+    # Print system information
+    echo "##############################################################################################################################"
+    echo "From some basic information on your system, you appear to be running: "
+    echo "    --  OS Name:        $(lsb_release -i)"
+    echo "    --  Description:    $(lsb_release -d)"
+    echo "    --  OS Version:     $(lsb_release -r)"
+    echo "    --  Code Name:      $(lsb_release -c)"
+    echo ""
+    echo "##############################################################################################################################"
     echo "Docker is an open platform for developing, shipping, and running applications."
     echo "It enables you to separate your applications from your infrastructure so you can deliver software quickly."
     echo ""
@@ -33,6 +44,7 @@ installDocker() {
     done
 }
 
+# Function to install Docker on Ubuntu
 installDockerUbuntu() {
     clear
     echo "Installing Docker on Ubuntu..."
@@ -42,6 +54,7 @@ installDockerUbuntu() {
     exit 0
 }
 
+# Function to install Docker on Debian
 installDockerDebian() {
     clear
     echo "Installing Docker on Debian..."
@@ -51,6 +64,7 @@ installDockerDebian() {
     exit 0
 }
 
+# Function to install Docker on CentOS
 installDockerCentOS() {
     clear
     echo "Installing Docker on CentOS..."
@@ -59,6 +73,7 @@ installDockerCentOS() {
     exit 0
 }
 
+# Function to install Docker on Fedora
 installDockerFedora() {
     clear
     echo "Installing Docker on Fedora..."
@@ -67,6 +82,7 @@ installDockerFedora() {
     exit 0
 }
 
+# Function to install Docker on Amazon Linux
 installDockerAmazonLinux() {
     clear
     echo "Installing Docker on Amazon Linux..."
@@ -75,6 +91,7 @@ installDockerAmazonLinux() {
     exit 0
 }
 
+# Function to install Docker on Arch Linux
 installDockerArchLinux() {
     clear
     echo "Installing Docker on Arch Linux..."
@@ -83,6 +100,7 @@ installDockerArchLinux() {
     exit 0
 }
 
+# Function to install Docker on OpenSUSE
 installDockerOpenSUSE() {
     clear
     echo "Installing Docker on OpenSUSE..."
@@ -91,4 +109,5 @@ installDockerOpenSUSE() {
     exit 0
 }
 
+# Call the installDocker function to start the installation process
 installDocker
