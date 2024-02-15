@@ -1,6 +1,35 @@
 #!/bin/bash
 
-# Function to check if Docker is installed
+# Function to check the OS type and print the message
+checkAndPrintOSType() {
+    if [ -f /etc/os-release ]; then
+        source /etc/os-release
+        if [ "$ID" == "ubuntu" ]; then
+            if [ "$VERSION_ID" == "20.04" ]; then
+                echo "Installed OS is Ubuntu 20.04."
+            elif [ "$VERSION_ID" == "22.04" ]; then
+                echo "Installed OS is Ubuntu 22.04."
+            else
+                echo "Installed OS is Ubuntu, but version is not 20.04 or 22.04."
+            fi
+        elif [ "$ID" == "debian" ]; then
+            echo "Installed OS is Debian."
+        elif [ "$ID" == "centos" ]; then
+            echo "Installed OS is CentOS."
+        elif [ "$ID" == "fedora" ]; then
+            echo "Installed OS is Fedora."
+        elif [ "$ID" == "amzn" ] || [ "$ID" == "amzn2" ]; then
+            echo "Installed OS is Amazon Linux."
+        elif [ "$ID" == "opensuse" ]; then
+            echo "Installed OS is OpenSUSE."
+        else
+            echo "Unknown OS."
+        fi
+    else
+        echo "OS release file not found."
+    fi
+}
+
 checkDockerInstalled() {
     if ! command -v docker &>/dev/null; then
         echo "Docker is not installed."
@@ -12,7 +41,7 @@ checkDockerInstalled() {
 }
 
 # Function to install Docker
-installDocker() {
+installDocker(){
     if ! checkDockerInstalled; then
         echo "##############################################################################################################################"
         echo "Docker is an open platform for developing, shipping, and running applications."
@@ -44,7 +73,7 @@ installDocker() {
             esac
         done
     else
-        echo "Exiting script as Docker is already installed."
+        echo "Docker is already installed."
         exit 0
     fi
 }
@@ -75,7 +104,7 @@ installDockerCentOS() {
     echo "Installing Docker on CentOS..."
     sudo yum install -y docker
     sudo systemctl start docker
-    sudo systemctl enable docker        
+    sudo systemctl enable docker
     echo "Docker installed successfully!"
     exit 0
 }
@@ -97,7 +126,7 @@ installDockerAmazonLinux() {
     echo "Installing Docker on Amazon Linux..."
     sudo yum install -y docker
     sudo systemctl start docker
-    sudo systemctl enable docker    
+    sudo systemctl enable docker
     echo "Docker installed successfully!"
     exit 0
 }
@@ -108,10 +137,13 @@ installDockerOpenSUSE() {
     echo "Installing Docker on OpenSUSE..."
     sudo zypper install -y docker
     sudo systemctl start docker
-    sudo systemctl enable docker    
+    sudo systemctl enable docker
     echo "Docker installed successfully!"
     exit 0
 }
 
-# Call the installDocker function to start the installation process
+# Call the function to check and print the OS type
+checkAndPrintOSType
+
+# Call the function to install Docker
 installDocker
